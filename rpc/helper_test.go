@@ -2,7 +2,7 @@ package rpc
 
 import (
 	"bytes"
-	"github.com/joeqian10/neo3-gogogo/rpc/models"
+	"github.com/joeqian10/neo3-gogogo-legacy/rpc/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"io/ioutil"

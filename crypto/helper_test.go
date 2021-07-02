@@ -1,7 +1,7 @@
 package crypto
 
 import (
-	"github.com/joeqian10/neo3-gogogo/helper"
+	"github.com/joeqian10/neo3-gogogo-legacy/helper"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"testing"

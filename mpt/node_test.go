@@ -1,9 +1,9 @@
 package mpt
 
 import (
-	"github.com/joeqian10/neo3-gogogo/crypto"
-	"github.com/joeqian10/neo3-gogogo/helper"
-	"github.com/joeqian10/neo3-gogogo/io"
+	"github.com/joeqian10/neo3-gogogo-legacy/crypto"
+	"github.com/joeqian10/neo3-gogogo-legacy/helper"
+	"github.com/joeqian10/neo3-gogogo-legacy/io"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

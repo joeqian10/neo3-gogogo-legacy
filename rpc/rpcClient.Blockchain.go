@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	"github.com/joeqian10/neo3-gogogo/rpc/models"
+	"github.com/joeqian10/neo3-gogogo-legacy/rpc/models"
 	"strconv"
 )
 

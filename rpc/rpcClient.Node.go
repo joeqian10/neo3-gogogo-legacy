@@ -1,6 +1,6 @@
 package rpc
 
-import "github.com/joeqian10/neo3-gogogo/rpc/models"
+import "github.com/joeqian10/neo3-gogogo-legacy/rpc/models"
 
 type GetConnectionCountResponse struct {
 	RpcResponse

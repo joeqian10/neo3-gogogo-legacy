@@ -6,8 +6,8 @@ import (
 	"crypto/elliptic"
 	"encoding/hex"
 	"fmt"
-	"github.com/joeqian10/neo3-gogogo/helper"
-	"github.com/joeqian10/neo3-gogogo/io"
+	"github.com/joeqian10/neo3-gogogo-legacy/helper"
+	"github.com/joeqian10/neo3-gogogo-legacy/io"
 	"math/big"
 )
 
