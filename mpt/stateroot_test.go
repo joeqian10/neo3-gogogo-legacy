@@ -1,0 +1,48 @@
+package mpt
+
+import (
+	"github.com/joeqian10/neo3-gogogo-legacy/rpc/models"
+	"github.com/stretchr/testify/assert"
+	"testing"
+
+	"github.com/joeqian10/neo3-gogogo-legacy/helper"
+	"github.com/joeqian10/neo3-gogogo-legacy/io"
+)
+
+func TestStateRoot_Serialize(t *testing.T) {
+	sr := StateRoot{
+		Version:   0,
+		Index:     1000,
+		RootHash:  "0x53360e02b03f548c6fc2f74f760d82a6749df6a844fd117ad7b62504390c8f8c",
+		Witnesses: []models.RpcWitness{
+			{
+				Invocation: "DEBnIRHFS8tG/6pw4cqZQbOQZri6rboaQPUJTCVS2ZD/HwOZG2m9IG3NJ8E/gTV++o7G1r35l+p5aQcAbqwoP1wTDECeyQcx2M1DP/irLP7sQy/tNRyina2rdK6ATV/QY+Ib4tJ3sYpXaiPx4iGo+AgqUeTRDmD8anfUNtYzjYgos6x9DEDS+medyKx59813WgtCusxLIK0tx50H36tbMGmTUQxR5nHzrpG8nzQ8HKNKRNMgQNBoT4U3pcHMpwJY9bXUge4R",
+				Verification: "EwwhAnIujtkuXxpCUIyfti3TyTtoOhUd/wjLU4lwdHzBhsu6DCECkeyvwoMh29AA30IiQMankxndS3LESLsUGkLoTzfm/doMIQOyS9DtdzAVHs/Ne1yheExdO8NYTw1NkKyi1i4gd5tG1wwhA/sZ1ZOuaNWI9PnKa/3WYbE9xjnVVYWhVYYXFD38xLJWFEF7zmyl",
+			},
+		},
+	}
+
+	bbw := io.NewBufBinaryWriter()
+	sr.Serialize(bbw.BinaryWriter)
+	assert.Nil(t, bbw.Err)
+	bs := bbw.Bytes()
+	assert.Equal(t, "00e80300008c8f0c390425b6d77a11fd44a8f69d74a6820d764ff7c26f8c543fb0020e365301c60c40672111c54bcb46ffaa70e1ca9941b39066b8baadba1a40f5094c2552d990ff1f03991b69bd206dcd27c13f81357efa8ec6d6bdf997ea796907006eac283f5c130c409ec90731d8cd433ff8ab2cfeec432fed351ca29dadab74ae804d5fd063e21be2d277b18a576a23f1e221a8f8082a51e4d10e60fc6a77d436d6338d8828b3ac7d0c40d2fa679dc8ac79f7cd775a0b42bacc4b20ad2dc79d07dfab5b306993510c51e671f3ae91bc9f343c1ca34a44d32040d0684f8537a5c1cca70258f5b5d481ee1193130c2102722e8ed92e5f1a42508c9fb62dd3c93b683a151dff08cb538970747cc186cbba0c210291ecafc28321dbd000df422240c6a79319dd4b72c448bb141a42e84f37e6fdda0c2103b24bd0ed7730151ecfcd7b5ca1784c5d3bc3584f0d4d90aca2d62e20779b46d70c2103fb19d593ae68d588f4f9ca6bfdd661b13dc639d55585a1558617143dfcc4b25614417bce6ca5", helper.BytesToHex(bs))
+}
+
+func TestStateRoot_Deserialize(t *testing.T) {
+	bs := helper.HexToBytes("00e80300008c8f0c390425b6d77a11fd44a8f69d74a6820d764ff7c26f8c543fb0020e365301c60c40672111c54bcb46ffaa70e1ca9941b39066b8baadba1a40f5094c2552d990ff1f03991b69bd206dcd27c13f81357efa8ec6d6bdf997ea796907006eac283f5c130c409ec90731d8cd433ff8ab2cfeec432fed351ca29dadab74ae804d5fd063e21be2d277b18a576a23f1e221a8f8082a51e4d10e60fc6a77d436d6338d8828b3ac7d0c40d2fa679dc8ac79f7cd775a0b42bacc4b20ad2dc79d07dfab5b306993510c51e671f3ae91bc9f343c1ca34a44d32040d0684f8537a5c1cca70258f5b5d481ee1193130c2102722e8ed92e5f1a42508c9fb62dd3c93b683a151dff08cb538970747cc186cbba0c210291ecafc28321dbd000df422240c6a79319dd4b72c448bb141a42e84f37e6fdda0c2103b24bd0ed7730151ecfcd7b5ca1784c5d3bc3584f0d4d90aca2d62e20779b46d70c2103fb19d593ae68d588f4f9ca6bfdd661b13dc639d55585a1558617143dfcc4b25614417bce6ca5")
+	br := io.NewBinaryReaderFromBuf(bs)
+	sr := new(StateRoot)
+	sr.Deserialize(br)
+	assert.Nil(t, br.Err)
+	assert.Equal(t, "0x53360e02b03f548c6fc2f74f760d82a6749df6a844fd117ad7b62504390c8f8c", sr.RootHash)
+}
+
+func TestStateRoot_Deserialize2(t *testing.T) {
+	bs := helper.HexToBytes("00e91a0200a92b147d34654f7b3d5727e991f33cbe5dd46577b7a4a486cb3286feca4b411601420c406822bcf16af3ad3527bd80af22551b67f5a5dc3e8a2581311f2de2a8decbdc1b5382ceee43aaf7d3a9cf5371692b016ed69a00a942ee98c51c7bdd57ffa080bb2a110c210214f402dac85ad3b100644abe975158ed6017f1c8a66133f5c8ccd2b5822f15bb11419ed0dc3a")
+	br := io.NewBinaryReaderFromBuf(bs)
+	sr := new(StateRoot)
+	sr.Deserialize(br)
+	assert.Nil(t, br.Err)
+	assert.Equal(t, "0x16414bcafe8632cb86a4a4b77765d45dbe3cf391e927573d7b4f65347d142ba9", sr.RootHash)
+}
